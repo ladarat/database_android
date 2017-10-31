@@ -1,4 +1,4 @@
-package com.project.demorecord;
+package com.project.demorecord.activity;
 
 import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
@@ -11,9 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.project.demorecord.R;
+import com.project.demorecord.adapter.MyAdapter;
 import com.project.demorecord.model.UserInfo;
 import com.project.demorecord.room.RoomUserInfoDatabase;
-import com.project.demorecord.sqlite.UserInfoDB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,9 @@ public class UserInfoListRoomActivity extends AppCompatActivity {
         list.setAdapter(adapter);
 
         infoDatabase = Room.databaseBuilder(getApplicationContext(),
-                RoomUserInfoDatabase.class, "DEMOINFO").build();
+                RoomUserInfoDatabase.class, "DEMOINFO")
+                .fallbackToDestructiveMigration()
+                .build();
 
         final List<UserInfo> suggestSearchList = new ArrayList<>();
         new AsyncTask<Void, Void, List<UserInfo>>() {

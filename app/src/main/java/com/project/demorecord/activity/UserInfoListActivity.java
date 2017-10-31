@@ -1,4 +1,4 @@
-package com.project.demorecord;
+package com.project.demorecord.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.project.demorecord.util.CommonSharePreference;
+import com.project.demorecord.R;
+import com.project.demorecord.model.UserInfoList;
+import com.project.demorecord.adapter.MyAdapter;
 import com.project.demorecord.model.UserInfo;
 
 import java.util.ArrayList;

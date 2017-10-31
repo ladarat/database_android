@@ -1,4 +1,4 @@
-package com.project.demorecord;
+package com.project.demorecord.activity;
 
 import android.app.AlertDialog;
 import android.arch.persistence.room.Room;
@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.project.demorecord.util.CommonSharePreference;
+import com.project.demorecord.R;
+import com.project.demorecord.model.UserInfoList;
 import com.project.demorecord.model.UserInfo;
 import com.project.demorecord.room.RoomUserInfoDatabase;
 import com.project.demorecord.sqlite.UserInfoDB;
@@ -26,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.editTextAge)
     EditText editTextAge;
-    private UserInfoDB userInfoDB;
+//    private UserInfoDB userInfoDB;
     private RoomUserInfoDatabase infoDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        userInfoDB = new UserInfoDB(this);
+//        userInfoDB = new UserInfoDB(this);
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this, this);
@@ -41,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         infoDatabase = Room.databaseBuilder(getApplicationContext(),
-                RoomUserInfoDatabase.class, "DEMOINFO").build();
+                RoomUserInfoDatabase.class, "DEMOINFO")
+                .fallbackToDestructiveMigration()
+                .build();
 
     }
 
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void storeDataInMemory(UserInfo userInfo) {
         savePreference(userInfo);
-        sqliteInsert(userInfo);
+       // sqliteInsert(userInfo);
         roomInsert(userInfo);
     }
 
@@ -96,11 +101,11 @@ public class MainActivity extends AppCompatActivity {
             userInfoList.getUserInfoList().add(userInfo);
         }
         preference.save(UserInfoListActivity.EXTTRA_LIST, userInfoList);
-        popupOK("Store data", "Save preference success");
+        //popupOK("Store data", "Save preference success");
     }
 
     private void sqliteInsert(UserInfo userInfo) {
-        userInfoDB.insert(userInfo);
+    //    userInfoDB.insert(userInfo);
     }
 
     private void roomInsert(final UserInfo userInfo) {
@@ -114,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute( UserInfo userInfo) {
-                popupOK("Store data", "Insert Room success");
+               // popupOK("Store data", "Insert Room success");
             }
         }.execute();
     }

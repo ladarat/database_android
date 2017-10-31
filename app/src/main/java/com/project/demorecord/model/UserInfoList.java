@@ -1,4 +1,4 @@
-package com.project.demorecord;
+package com.project.demorecord.model;
 
 import com.project.demorecord.model.UserInfo;
 
